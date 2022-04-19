@@ -3,6 +3,8 @@ from aiogram import types, Dispatcher
 from config import bot, dp, ADMIN
 import random
 
+from database import bot_db
+
 
 # @dp.message_handler(commands=['mem'])
 async def mem_1(message: types.Message):
@@ -59,6 +61,10 @@ async def echo_message(message: types.Message):
             emoji_list = ["⚽", "🏀", "🎲", "🎯", "🎳", "🎰"]
             emoji = random.choices(emoji_list)
             await bot.send_dice(message.chat.id, emoji=emoji)
+
+
+async def show_random_user(message: types.Message):
+    await bot_db.sql_command_random(message)
 
 
 def register_hendlers_client(dp: Dispatcher):
